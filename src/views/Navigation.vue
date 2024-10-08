@@ -2,7 +2,7 @@
 	<!------------------------------>
 	<!----- LARGE SCREEN NAV ------->
 	<!------------------------------>
-	<nav class="nav_container" v-if="!mobile_screen">
+	<nav class="nav_container bg_white" v-if="!mobile_screen">
 		<div class="nav_wrapper max_width_container">
 			<p class="nav_name">Irene Toledo</p>
 			<ul class="nav_lists_wrapper">
@@ -19,7 +19,7 @@
 	<!------------------------------>
 	<!--------- MOBILE NAV --------->
 	<!------------------------------>
-	<nav class="nav_container" v-else>
+	<nav class="nav_container bg_white" v-else>
 		<div class="nav_wrapper max_width_container">
 			<p class="nav_name" :class="{ active: active_menu_bar }">Irene Toledo</p>
 
@@ -28,7 +28,7 @@
 				class="mobile_nav_lists_wrapper"
 				:class="{ active: active_menu_bar }"
 			>
-				<li class="mobile_nav_list"></li>
+				<li class="mobile_nav_list">About</li>
 				<li class="mobile_nav_list">Why Me?</li>
 				<li class="mobile_nav_list">Services</li>
 				<li class="mobile_nav_list">Portfolio</li>
@@ -98,7 +98,11 @@
  ********** LARGE SCREEN
  ****************************************/
 	.nav_container {
-		@apply flex items-center w-full h-[4.7rem] px-[2rem];
+		@apply fixed flex items-center w-full h-[4.7rem] px-[2rem] z-[20];
+	}
+
+	.nav_container.bg_white {
+		@apply bg-shades-white;
 	}
 
 	.nav_wrapper {
@@ -128,12 +132,13 @@
 	}
 
 	.mobile_nav_lists_wrapper {
-		@apply absolute top-0 left-0 flex flex-col items-center pt-[6rem] gap-10 w-full h-full bg-primary-800;
+		@apply absolute top-0 left-0 flex flex-col items-center pt-[6rem] gap-10 w-full h-full bg-primary-800 h-full;
 		transform: translateY(-100rem);
 		transition: all 0.5s ease-in-out;
 	}
 
 	.mobile_nav_lists_wrapper.active {
+		@apply h-screen;
 		transform: translateY(0rem);
 	}
 

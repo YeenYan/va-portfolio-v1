@@ -58,6 +58,5 @@
 
 	.hover-button:hover > :deep(li) {
 		@apply text-neutral-700 font-medium;
-		/* transform: scale(1.1); */
 	}
 </style>

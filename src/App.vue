@@ -1,5 +1,6 @@
 <template>
-	<main class="app_container">
+	<div v-if="loading">Loading...</div>
+	<main class="app_container" v-else>
 		<header class="header_container">
 			<Navigation />
 			<HeaderContent />
@@ -10,6 +11,17 @@
 <script setup>
 	import Navigation from "@/views/Navigation.vue";
 	import HeaderContent from "@/views/HeaderContent.vue";
+
+	import { onMounted } from "vue";
+	import { useImageLoader } from "@/composables/useImageLoader";
+
+	// Use the image loader composable
+	const { loading, loadError, loadAllImages } = useImageLoader();
+
+	// Load all images on component mount
+	onMounted(() => {
+		loadAllImages();
+	});
 </script>
 
 <style lang="postcss">
@@ -69,15 +81,15 @@
 	}
 
 	@media (min-width: 900px) {
-		.app_container {
+		/* .app_container {
 			@apply flex h-screen overflow-y-hidden;
-		}
+		} */
 
 		/*****************************************
  	********** MAX_WIDTH_CONTAINER ***********
  	****************************************/
 		.max_width_container {
-			@apply w-[90%] max-w-[71rem];
+			@apply w-[94%] max-w-[71rem];
 		}
 	}
 </style>

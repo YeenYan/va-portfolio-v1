@@ -3,6 +3,9 @@ import { createStore } from "vuex";
 // Create a new store instance.
 export const store = createStore({
 	state: {
+		// Global Loader
+		global_loader: true,
+
 		// Initialize with the current width
 		windowWidth: window.innerWidth,
 		mobile_screen: false,
@@ -11,6 +14,12 @@ export const store = createStore({
 		buttonTransform: "translate(0, 0)",
 	},
 	mutations: {
+		/*****************************************
+		 ****** GLOBAL LOADER
+		 ****************************************/
+		setGlobalLoader(state, val) {
+			state.global_loader = val;
+		},
 		/*****************************************
 		 ****** SCREEN DEVICE CHECKING
 		 ****************************************/
