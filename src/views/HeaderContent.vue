@@ -62,7 +62,7 @@
 
 <style lang="postcss" scoped>
 	.hero_container {
-		@apply flex flex-col items-center h-screen py-[9rem] mx-auto;
+		@apply flex flex-col items-center h-[120vh] py-[9rem] mx-auto;
 	}
 
 	.hero_tagline {

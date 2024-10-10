@@ -1,16 +1,25 @@
 <template>
-	<div v-if="loading">Loading...</div>
+	<MainLoader v-if="loading" />
 	<main class="app_container" v-else>
 		<header class="header_container">
 			<Navigation />
 			<HeaderContent />
 		</header>
+
+		<section>
+			<IntroductionContent />
+			<IntroductionAbout />
+		</section>
 	</main>
 </template>
 
 <script setup>
 	import Navigation from "@/views/Navigation.vue";
 	import HeaderContent from "@/views/HeaderContent.vue";
+	import IntroductionContent from "@/views/IntroductionContent.vue";
+	import IntroductionAbout from "@/views/IntroductionAbout.vue";
+
+	import MainLoader from "@/components/Main_Loader.vue";
 
 	import { onMounted } from "vue";
 	import { useImageLoader } from "@/composables/useImageLoader";
@@ -31,6 +40,10 @@
 
 	html {
 		scroll-behavior: smooth;
+	}
+
+	.placeholder {
+		@apply h-screen;
 	}
 
 	/* Scrollbar Styles */
@@ -78,6 +91,28 @@
  ****************************************/
 	.max_width_container {
 		@apply w-[90%] mx-auto;
+	}
+
+	/*****************************************
+ ************ SECTION_HEADERS *************
+ ****************************************/
+	.section_title_wrapper {
+		@apply text-center w-full max-w-[38rem];
+	}
+
+	.section_title_wrapper > .title_heading {
+		@apply text-neutral-800 font-semibold;
+		font-size: clamp(2.25rem, 4vw, 3rem);
+	}
+
+	.section_title_wrapper > .title_subheading {
+		@apply text-neutral-600 font-semibold;
+		font-size: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.section_title_wrapper > .title_details {
+		@apply w-[90%] mx-auto pt-[1rem];
+		font-size: clamp(0.875rem, 2vw, 1rem);
 	}
 
 	@media (min-width: 900px) {
