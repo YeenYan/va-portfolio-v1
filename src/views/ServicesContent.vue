@@ -184,13 +184,13 @@
 							start: "50% 50%",
 							end: "80% 80%",
 							scrub: true,
-							markers: {
-								startColor: "black",
-								endColor: "black",
-								fontSize: "18px",
-								fontWeight: "bold",
-								indent: 60,
-							},
+							// markers: {
+							// 	startColor: "black",
+							// 	endColor: "black",
+							// 	fontSize: "18px",
+							// 	fontWeight: "bold",
+							// 	indent: 60,
+							// },
 							onEnter: () => handleEnter(),
 							onLeave: () => handleReset(),
 							onEnterBack: () => handleEnter(),
@@ -230,13 +230,13 @@
 									start: "top 50%",
 									end: "bottom bottom",
 									scrub: true,
-									markers: {
-										startColor: "blue",
-										endColor: "blue",
-										fontSize: "18px",
-										fontWeight: "bold",
-										indent: 60,
-									},
+									// markers: {
+									// 	startColor: "blue",
+									// 	endColor: "blue",
+									// 	fontSize: "18px",
+									// 	fontWeight: "bold",
+									// 	indent: 60,
+									// },
 								},
 							});
 
@@ -262,13 +262,13 @@
 									start: "top 50%",
 									end: "bottom bottom",
 									scrub: true,
-									markers: {
-										startColor: "blue",
-										endColor: "blue",
-										fontSize: "18px",
-										fontWeight: "bold",
-										indent: 60,
-									},
+									// markers: {
+									// 	startColor: "red",
+									// 	endColor: "red",
+									// 	fontSize: "18px",
+									// 	fontWeight: "bold",
+									// 	indent: 60,
+									// },
 								},
 							});
 
@@ -309,11 +309,8 @@
 </script>
 
 <style lang="postcss" scoped>
-	.triggerd {
-		@apply bg-red-500;
-	}
 	.service_section_container {
-		@apply flex items-center justify-center w-full h-full mx-auto;
+		@apply flex items-center justify-center w-full h-full mx-auto overflow-x-hidden;
 		/* background: #081437; */
 	}
 
@@ -349,7 +346,8 @@
 	}
 
 	.service_title_text {
-		@apply text-[1.5rem] text-shades-white font-bold pb-[.2rem];
+		@apply text-shades-white font-bold pb-[.2rem];
+		font-size: clamp(1.2rem, 2vw, 1.5rem);
 	}
 
 	.service_icon {
