@@ -1,6 +1,7 @@
 <template>
 	<div class="introduction_container" ref="mainContainer">
-		<div class="test_wrapper max_width_container">
+		<div class="introduction_wrapper">
+			<!-- max_width_container -->
 			<DesktopLike />
 		</div>
 	</div>
@@ -35,7 +36,7 @@
 			if (newValue && mainContainer.value) {
 				// Create a GSAP context to scope the animations
 				ctx = gsap.context((self) => {
-					const container = self.selector(".test_wrapper");
+					const container = self.selector(".introduction_wrapper");
 					const group = self.selector(".figma_container");
 
 					let tl = gsap.timeline({
@@ -43,18 +44,17 @@
 						// Set up the scroll trigger for this animation
 						scrollTrigger: {
 							trigger: container,
-							start: "top top",
-							end: "bottom 20%",
+							start: "top 10%",
+							end: "bottom 15%",
 							scrub: true, // Smoothly animate the box as the user scrolls
 							pin: true, // Pin the element
-							markers: {
-								startColor: "blue",
-								endColor: "red",
-								fontSize: "18px",
-								fontWeight: "bold",
-								indent: 60,
-							},
-							// toggleClass: "animate_box",
+							// markers: {
+							// 	startColor: "blue",
+							// 	endColor: "red",
+							// 	fontSize: "18px",
+							// 	fontWeight: "bold",
+							// 	indent: 60,
+							// },
 						},
 					});
 
@@ -66,7 +66,7 @@
 						})
 						.to(group, {
 							scale: 2.5,
-							y: 150,
+							y: 60,
 							duration: 100,
 						});
 				}, mainContainer.value); // Pass the main element as the scope for the GSAP context);
@@ -86,23 +86,14 @@
 
 <style lang="postcss" scoped>
 	.introduction_container {
-		@apply w-full h-[150vh] mx-auto overflow-hidden mt-[10rem];
+		@apply w-full h-[100vh] mx-auto overflow-hidden;
 	}
 
 	.introduction_wrapper {
-		@apply absolute top-0 flex justify-center w-full h-full;
-	}
-
-	.image_large {
-		@apply w-full absolute;
-		object-fit: contain;
-	}
-
-	.test_wrapper {
 		@apply h-full;
 	}
 
 	.group {
-		@apply bg-green-100 w-full;
+		@apply w-full;
 	}
 </style>

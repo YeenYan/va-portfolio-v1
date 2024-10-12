@@ -12,6 +12,9 @@ export const store = createStore({
 
 		// Button Animations
 		buttonTransform: "translate(0, 0)",
+
+		// Navigation Background Change
+		is_nav_bg_change: false,
 	},
 	mutations: {
 		/*****************************************
@@ -19,6 +22,13 @@ export const store = createStore({
 		 ****************************************/
 		setGlobalLoader(state, val) {
 			state.global_loader = val;
+		},
+
+		/*****************************************
+		 ****** CHANGE NAV COLOR
+		 ****************************************/
+		changeNavBackground(state, val) {
+			state.is_nav_bg_change = val;
 		},
 		/*****************************************
 		 ****** SCREEN DEVICE CHECKING

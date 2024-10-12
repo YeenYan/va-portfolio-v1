@@ -258,8 +258,8 @@
 
 <style lang="postcss" scoped>
 	/*****************************************
- ********** GENERIC
- ****************************************/
+	********** GENERIC
+	****************************************/
 	.figma_icon {
 		@apply text-[.7rem] px-[.8rem] py-[.7rem] text-tertiary-200;
 	}
@@ -285,10 +285,10 @@
 	}
 
 	/*****************************************
- ********** PARENT
- ****************************************/
+	********** PARENT
+	****************************************/
 	.figma_container {
-		@apply flex flex-col items-center bg-neutral-900 h-screen px-[1.5rem] pb-[1.5rem] rounded-2xl;
+		@apply flex flex-col items-center bg-neutral-900 h-screen max-h-[45rem] px-[1.5rem] pb-[1.5rem] rounded-2xl w-full max-w-[70rem] mx-auto;
 	}
 
 	.lens {
@@ -301,8 +301,8 @@
 	/* bg-shades-white */
 
 	/*****************************************
- ********** TOP BAR
- ****************************************/
+	********** TOP BAR
+	****************************************/
 
 	.top_bar_wrapper {
 		@apply flex items-center justify-between w-full bg-tertiary-800;
@@ -325,8 +325,8 @@
 	}
 
 	/*****************************************
- ********** CENTER CANVASS
- ****************************************/
+	********** CENTER CANVASS
+	****************************************/
 	.canvass_container {
 		@apply relative h-[95%] p-[1rem];
 		background: #1e1e1e;

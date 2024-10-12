@@ -1,5 +1,5 @@
 <template>
-	<section class="about_section_wrapper">
+	<aside class="about_section_wrapper max_width_container">
 		<div>
 			<div class="section_title_wrapper">
 				<p class="title_subheading">Count on me to keep your Tasks</p>
@@ -19,7 +19,7 @@
 				Social Media Management
 			</p>
 		</div>
-	</section>
+	</aside>
 </template>
 
 <script setup>
@@ -28,15 +28,22 @@
 
 <style lang="postcss" scoped>
 	.about_section_wrapper {
-		@apply flex justify-center h-[200vh];
+		@apply flex items-center justify-center h-[100vh] mx-auto;
 	}
 
 	.position_wrapper {
 		@apply text-lg text-center text-shades-white bg-primary-700 p-[.7rem] mx-auto w-full max-w-[31rem] rounded-xl;
 		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+		font-size: clamp(0.875rem, 1vw, 1rem);
 	}
 
 	.image_wrapper {
 		@apply w-full max-w-[37rem] py-[4rem];
+	}
+
+	@media (min-width: 900px) {
+		.about_section_wrapper {
+			@apply items-start h-[100vh];
+		}
 	}
 </style>

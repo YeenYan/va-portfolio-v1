@@ -2,7 +2,11 @@
 	<!------------------------------>
 	<!----- LARGE SCREEN NAV ------->
 	<!------------------------------>
-	<nav class="nav_container bg_white" v-if="!mobile_screen">
+	<nav
+		class="nav_container"
+		v-if="!mobile_screen"
+		:class="{ bg_transparent: change_bg }"
+	>
 		<div class="nav_wrapper max_width_container">
 			<p class="nav_name">Irene Toledo</p>
 			<ul class="nav_lists_wrapper">
@@ -19,7 +23,7 @@
 	<!------------------------------>
 	<!--------- MOBILE NAV --------->
 	<!------------------------------>
-	<nav class="nav_container bg_white" v-else>
+	<nav class="nav_container" :class="{ bg_transparent: change_bg }" v-else>
 		<div class="nav_wrapper max_width_container">
 			<p class="nav_name" :class="{ active: active_menu_bar }">Irene Toledo</p>
 
@@ -41,9 +45,9 @@
 				v-if="mobile_screen"
 				@click.prevent="toggle_menu_bar"
 			>
-				<li class="menu_line"></li>
-				<li class="menu_line"></li>
-				<li class="menu_line"></li>
+				<li class="menu_line" :class="{ bg_transparent: change_bg }"></li>
+				<li class="menu_line" :class="{ bg_transparent: change_bg }"></li>
+				<li class="menu_line" :class="{ bg_transparent: change_bg }"></li>
 			</ul>
 		</div>
 	</nav>
@@ -62,6 +66,11 @@
 	 ****************************************/
 	// Computed property to access the screen width from the store
 	const mobile_screen = computed(() => store.state.mobile_screen);
+
+	/*****************************************
+	 ******** WATCH BACKGROUND CHANGE
+	 ****************************************/
+	const change_bg = computed(() => store.state.is_nav_bg_change);
 
 	// Function to update screen width and log it
 	const updateScreenWidth = () => {
@@ -95,14 +104,15 @@
 
 <style lang="postcss" scoped>
 	/*****************************************
- ********** LARGE SCREEN
- ****************************************/
+	********** LARGE SCREEN
+	****************************************/
 	.nav_container {
 		@apply fixed flex items-center w-full h-[4.7rem] px-[2rem] z-[20];
 	}
 
-	.nav_container.bg_white {
-		@apply bg-shades-white;
+	.nav_container {
+		background: rgb(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
 	}
 
 	.nav_wrapper {
@@ -123,8 +133,8 @@
 	}
 
 	/*****************************************
- ********** MOBILE SCREEN
- ****************************************/
+	********** MOBILE SCREEN
+	****************************************/
 
 	.nav_name.active {
 		@apply text-shades-white;
@@ -147,8 +157,8 @@
 	}
 
 	/*****************************************
- ********** HAMBURGER MENU STYLE **********
- ****************************************/
+	********** HAMBURGER MENU STYLE **********
+	****************************************/
 	.menu_wrapper {
 		@apply relative flex flex-col gap-1 justify-center;
 	}
@@ -181,6 +191,34 @@
 		@apply absolute bottom-[-.20rem] right-[-.08rem];
 		transform: rotate(-45deg);
 	}
+
+	/*****************************************
+	******** CHANGE TO DARK TRANSPARENT
+	****************************************/
+	.nav_container.bg_transparent {
+		background: rgb(8, 20, 55, 0.9);
+		backdrop-filter: blur(10px);
+	}
+
+	.nav_container.bg_transparent .nav_name {
+		@apply text-shades-white;
+	}
+
+	.nav_container.bg_transparent .nav_list {
+		@apply text-neutral-400;
+	}
+
+	.nav_container.bg_transparent .nav_btn {
+		@apply border-shades-white text-shades-white;
+	}
+
+	.menu_line.bg_transparent {
+		@apply bg-shades-white;
+	}
+
+	/*****************************************
+	******** MEDIA QUERIES
+	****************************************/
 
 	@media (min-width: 900px) {
 		.nav_wrapper {

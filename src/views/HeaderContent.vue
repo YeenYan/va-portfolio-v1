@@ -5,7 +5,9 @@
 			As your virtual assistant, I provide tailored solutions to keep your business
 			running smoothly in today’s fast-paced world.
 		</p>
-		<button class="btn btn_outline hero_cta">Say Hello</button>
+		<button class="btn btn_outline hero_cta" v-if="mobile_screen">
+			Say Hello
+		</button>
 		<div class="header_image_wrapper">
 			<img
 				:srcset="HeaderImageLarge"
