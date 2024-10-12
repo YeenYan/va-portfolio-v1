@@ -54,10 +54,9 @@
 </template>
 
 <script setup>
+	import CustomButton from "@/components/Button.vue";
 	import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 	import { useStore } from "vuex";
-
-	import CustomButton from "@/components/Button.vue";
 
 	const store = useStore();
 

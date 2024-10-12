@@ -1,6 +1,6 @@
 <template>
 	<aside class="service_section_container" ref="serviceContainer">
-		<div class="service_section_wrapper">
+		<div class="service_section_wrapper" :class="{ show: change_bg }">
 			<!-- max_width_container -->
 			<div class="section_title_wrapper">
 				<p class="title_subheading">What Can I Offer</p>
@@ -88,12 +88,16 @@
 	import GraphicImage from "@/assets/images/graphic.webp";
 	import SocialMediaImage from "@/assets/images/social_media.webp";
 
-	import { onMounted, onUnmounted, ref, watch } from "vue";
+	import { onMounted, onUnmounted, ref, watch, computed } from "vue";
 	import gsap from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	// Import custom composable for managing transition state
 	import { useTransitionComposable } from "../composables/transition-composable";
+	import { useStore } from "vuex";
+
 	gsap.registerPlugin(ScrollTrigger);
+
+	const store = useStore();
 
 	/*****************************************
 	 ******** CONTENT HERE
@@ -153,6 +157,8 @@
 		},
 	];
 
+	const change_bg = computed(() => store.state.is_nav_bg_change);
+
 	/*****************************************
 	 ******** GSAP FUNCTIONS
 	 ****************************************/
@@ -181,7 +187,7 @@
 					gsap.timeline({
 						scrollTrigger: {
 							trigger: container,
-							start: "50% 50%",
+							start: "50% 70%",
 							end: "80% 80%",
 							scrub: true,
 							// markers: {
@@ -201,17 +207,17 @@
 
 					function handleEnter() {
 						gsap.to(group, {
+							opacity: 1,
 							duration: 1,
 							backgroundColor: "#081437",
-							autoAlpha: 1,
 						});
 					}
 
 					function handleReset() {
 						gsap.to(group, {
+							opacity: 0,
 							duration: 1,
 							backgroundColor: "#FFFFFF",
-							autoAlpha: 0,
 						});
 					}
 
@@ -315,7 +321,12 @@
 	}
 
 	.service_section_wrapper {
-		@apply w-full h-full pt-[10rem] pb-[30rem];
+		@apply w-full h-full pt-[20rem] pb-[30rem];
+		opacity: 0;
+	}
+
+	.service_section_wrapper.show {
+		opacity: 1;
 	}
 
 	.service_section_wrapper .title_subheading {
