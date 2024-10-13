@@ -187,7 +187,7 @@
 					gsap.timeline({
 						scrollTrigger: {
 							trigger: container,
-							start: "50% 70%",
+							start: "45% 70%",
 							end: "80% 80%",
 							scrub: true,
 							// markers: {
@@ -317,7 +317,6 @@
 <style lang="postcss" scoped>
 	.service_section_container {
 		@apply flex items-center justify-center w-full h-full mx-auto overflow-x-hidden;
-		/* background: #081437; */
 	}
 
 	.service_section_wrapper {

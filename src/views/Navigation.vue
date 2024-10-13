@@ -8,15 +8,27 @@
 		:class="{ bg_transparent: change_bg }"
 	>
 		<div class="nav_wrapper max_width_container">
-			<p class="nav_name">Irene Toledo</p>
+			<p class="nav_name" @click="scrollTo('intro')">Irene Toledo</p>
 			<ul class="nav_lists_wrapper">
 				<CustomButton><li class="nav_list">About</li></CustomButton>
-				<CustomButton><li class="nav_list">Why Me?</li></CustomButton>
-				<CustomButton><li class="nav_list">Services</li></CustomButton>
-				<CustomButton><li class="nav_list">Portfolio</li></CustomButton>
-				<CustomButton><li class="nav_list">Contact</li></CustomButton>
+				<CustomButton @click="scrollTo('whyMe')"
+					><li class="nav_list">Why Me?</li></CustomButton
+				>
+				<CustomButton
+					><li class="nav_list" @click="scrollTo('services')">
+						Services
+					</li></CustomButton
+				>
+				<CustomButton @click="scrollTo('portfolio')"
+					><li class="nav_list">Portfolio</li></CustomButton
+				>
+				<CustomButton @click="scrollTo('contact')"
+					><li class="nav_list">Contact</li></CustomButton
+				>
 			</ul>
-			<button class="btn nav_btn btn_outline">Say Hello</button>
+			<button class="btn nav_btn btn_outline" @click.prevent="openGmail">
+				Say Hello
+			</button>
 		</div>
 	</nav>
 
@@ -25,7 +37,13 @@
 	<!------------------------------>
 	<nav class="nav_container" :class="{ bg_transparent: change_bg }" v-else>
 		<div class="nav_wrapper max_width_container">
-			<p class="nav_name" :class="{ active: active_menu_bar }">Irene Toledo</p>
+			<p
+				class="nav_name"
+				:class="{ active: active_menu_bar }"
+				@click="mobileScrollTo('intro')"
+			>
+				Irene Toledo
+			</p>
 
 			<ul
 				v-if="mobile_screen"
@@ -33,10 +51,14 @@
 				:class="{ active: active_menu_bar }"
 			>
 				<li class="mobile_nav_list">About</li>
-				<li class="mobile_nav_list">Why Me?</li>
-				<li class="mobile_nav_list">Services</li>
-				<li class="mobile_nav_list">Portfolio</li>
-				<li class="mobile_nav_list">Contact</li>
+				<li class="mobile_nav_list" @click="mobileScrollTo('whyMe')">Why Me?</li>
+				<li class="mobile_nav_list" @click="mobileScrollTo('services')">
+					Services
+				</li>
+				<li class="mobile_nav_list" @click="mobileScrollTo('portfolio')">
+					Portfolio
+				</li>
+				<li class="mobile_nav_list" @click="mobileScrollTo('contact')">Contact</li>
 			</ul>
 
 			<ul
@@ -55,7 +77,7 @@
 
 <script setup>
 	import CustomButton from "@/components/Button.vue";
-	import { computed, onMounted, onBeforeUnmount, ref } from "vue";
+	import { computed, onMounted, onBeforeUnmount, ref, defineEmits } from "vue";
 	import { useStore } from "vuex";
 
 	const store = useStore();
@@ -99,6 +121,30 @@
 	const toggle_menu_bar = () => {
 		active_menu_bar.value = !active_menu_bar.value;
 	};
+
+	/*****************************************
+	 ******** EMAIL
+	 ****************************************/
+	const openGmail = () => {
+		store.commit("openGmail");
+	};
+
+	/*****************************************
+	 ******** TRIGGER SCROLL
+	 ****************************************/
+	// Define the emits
+	const emit = defineEmits();
+
+	// Method to emit scroll event
+	const scrollTo = (section) => {
+		emit("scroll", section);
+	};
+
+	// Method to emit scroll event FOR MOBILE
+	const mobileScrollTo = (section) => {
+		emit("scroll", section);
+		active_menu_bar.value = false;
+	};
 </script>
 
 <style lang="postcss" scoped>
@@ -119,7 +165,7 @@
 	}
 
 	.nav_name {
-		@apply text-lg text-neutral-800 font-semibold z-[1];
+		@apply text-lg text-neutral-800 font-semibold z-[1] cursor-pointer;
 	}
 
 	.nav_lists_wrapper {

@@ -10,6 +10,7 @@ import Image6 from "@/assets/images/administrative.webp";
 import Image7 from "@/assets/images/support.webp";
 import Image8 from "@/assets/images/graphic.webp";
 import Image9 from "@/assets/images/social_media.webp";
+import Image10 from "@/assets/images/CircularText.webp";
 
 // Function to load an image asynchronously
 const loadImage = (src) => {
@@ -39,6 +40,7 @@ export const useImageLoader = () => {
 		Image7,
 		Image8,
 		Image9,
+		Image10,
 	];
 
 	const loadAllImages = async () => {

@@ -15,6 +15,9 @@ export const store = createStore({
 
 		// Navigation Background Change
 		is_nav_bg_change: false,
+
+		// EMAIL
+		email: "toledoireneb@gmail.com",
 	},
 	mutations: {
 		/*****************************************
@@ -52,6 +55,19 @@ export const store = createStore({
 		},
 		resetButtonTransform(state) {
 			state.buttonTransform = "translate(0, 0)";
+		},
+
+		/*****************************************
+		 ****** EMAIL FUNCTION
+		 ****************************************/
+		openGmail(state) {
+			const isAndroid = /android/i.test(navigator.userAgent);
+
+			if (isAndroid) {
+				window.location.href = `intent://compose/?to=${state.email}#Intent;scheme=mailto;package=com.google.android.gm;end`;
+			} else {
+				window.location.href = `mailto:${state.email}`;
+			}
 		},
 	},
 });
