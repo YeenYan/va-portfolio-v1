@@ -1,6 +1,6 @@
 <template>
 	<MainLoader v-if="loading" />
-	<main class="app_container" v-else>
+	<main class="app_container" :class="{ about_active: has_about }" v-else>
 		<header class="header_container" id="intro">
 			<Navigation @scroll="scrollToElement" />
 			<HeaderContent />
@@ -19,11 +19,20 @@
 			</div>
 			<ContactContent id="contact" />
 		</section>
+
+		<AboutContent v-if="has_about" />
 	</main>
 </template>
 
 <script setup>
-	import { ref, computed, onMounted, onBeforeUnmount, onUnmounted } from "vue";
+	import {
+		ref,
+		computed,
+		onMounted,
+		onBeforeUnmount,
+		onUnmounted,
+		watch,
+	} from "vue";
 	import { useStore } from "vuex";
 	import Navigation from "@/views/Navigation.vue";
 	import HeaderContent from "@/views/HeaderContent.vue";
@@ -32,6 +41,7 @@
 	import WhyMeContent from "@/views/WhyMeContent.vue";
 	import ServicesContent from "@/views/ServicesContent.vue";
 	import ContactContent from "@/views/ContactContent.vue";
+	import AboutContent from "@/views/AboutModal.vue";
 	import MainLoader from "@/components/Main_Loader.vue";
 	import { useImageLoader } from "@/composables/useImageLoader";
 
@@ -41,6 +51,17 @@
 
 	// Computed property to access the screen width from the store
 	const mobile_screen = computed(() => store.state.mobile_screen);
+
+	// ABOUT CONTENT
+	const has_about = computed(() => store.state.show_about);
+
+	// Watch then hide the bpdy scroll when about modal is visible
+	watch(
+		() => has_about.value,
+		(newVal) => {
+			document.body.style.overflow = newVal ? "hidden" : "";
+		}
+	);
 
 	// Handle screen resizing
 	const updateScreenWidth = () => {
@@ -132,6 +153,10 @@
 	.placeholder {
 		@apply h-screen;
 	}
+
+	/* .app_container.about_active {
+		@apply h-screen overflow-hidden;
+	} */
 
 	/* Scrollbar Styles */
 	/* html {

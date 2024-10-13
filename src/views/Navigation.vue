@@ -10,7 +10,9 @@
 		<div class="nav_wrapper max_width_container">
 			<p class="nav_name" @click="scrollTo('intro')">Irene Toledo</p>
 			<ul class="nav_lists_wrapper">
-				<CustomButton><li class="nav_list">About</li></CustomButton>
+				<CustomButton
+					><li class="nav_list" @click.prevent="show_about">About</li></CustomButton
+				>
 				<CustomButton @click="scrollTo('whyMe')"
 					><li class="nav_list">Why Me?</li></CustomButton
 				>
@@ -50,7 +52,7 @@
 				class="mobile_nav_lists_wrapper"
 				:class="{ active: active_menu_bar }"
 			>
-				<li class="mobile_nav_list">About</li>
+				<li class="mobile_nav_list" @click.prevent="show_about">About</li>
 				<li class="mobile_nav_list" @click="mobileScrollTo('whyMe')">Why Me?</li>
 				<li class="mobile_nav_list" @click="mobileScrollTo('services')">
 					Services
@@ -96,6 +98,14 @@
 	// Function to update screen width and log it
 	const updateScreenWidth = () => {
 		store.commit("checkScreen");
+	};
+
+	/*****************************************
+	 ******** SHOW ABOUT CONTENT
+	 ****************************************/
+	const show_about = () => {
+		active_menu_bar.value = false;
+		store.commit("show_about", true);
 	};
 
 	/*****************************************
@@ -152,7 +162,7 @@
 	********** LARGE SCREEN
 	****************************************/
 	.nav_container {
-		@apply fixed flex items-center w-full h-[4.7rem] px-[2rem] z-[20];
+		@apply fixed flex items-center w-full h-[4.7rem] px-[2rem] z-[10];
 	}
 
 	.nav_container {

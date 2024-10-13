@@ -18,6 +18,9 @@ export const store = createStore({
 
 		// EMAIL
 		email: "toledoireneb@gmail.com",
+
+		// ABOUT
+		show_about: false,
 	},
 	mutations: {
 		/*****************************************
@@ -68,6 +71,13 @@ export const store = createStore({
 			} else {
 				window.location.href = `mailto:${state.email}`;
 			}
+		},
+
+		/*****************************************
+		 ****** TOGGLE ABOUT
+		 ****************************************/
+		show_about(state, val) {
+			state.show_about = val;
 		},
 	},
 });
