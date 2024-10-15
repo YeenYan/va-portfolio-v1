@@ -77,7 +77,7 @@
 
 <style lang="postcss" scoped>
 	.portfolio_section_container {
-		@apply flex flex-col items-center pt-[7rem] pb-[10rem] h-full mx-auto;
+		@apply w-full overflow-x-hidden flex flex-col items-center pt-[7rem] pb-[10rem] h-full mx-auto;
 	}
 
 	.swiper_container {
