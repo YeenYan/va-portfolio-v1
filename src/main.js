@@ -7,6 +7,9 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import "@/assets/base.css";
 
+import "swiper/css";
+import "swiper/css/effect-cards";
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 import App from "@/App.vue";

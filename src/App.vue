@@ -13,10 +13,7 @@
 			<div ref="serviceContainer" id="services">
 				<ServicesContent />
 			</div>
-			<div class="sample" id="portfolio">
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo suscipit
-				provident ullam cupiditate dolore asperiores ipsam blanditiis id odit natus.
-			</div>
+			<PortfolioContent id="portfolio" />
 			<ContactContent id="contact" />
 		</section>
 
@@ -40,6 +37,7 @@
 	import IntroductionAbout from "@/views/IntroductionAbout.vue";
 	import WhyMeContent from "@/views/WhyMeContent.vue";
 	import ServicesContent from "@/views/ServicesContent.vue";
+	import PortfolioContent from "@/views/PortfolioContent.vue";
 	import ContactContent from "@/views/ContactContent.vue";
 	import AboutContent from "@/views/AboutModal.vue";
 	import MainLoader from "@/components/Main_Loader.vue";
