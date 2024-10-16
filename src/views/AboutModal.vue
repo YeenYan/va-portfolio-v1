@@ -53,7 +53,7 @@
 
 <style lang="postcss" scoped>
 	.about_container {
-		@apply h-screen flex items-center justify-center fixed z-10 inset-0 overflow-y-auto pt-[10rem];
+		@apply flex items-center justify-center fixed z-10 inset-0 overflow-y-auto pt-[10rem];
 	}
 
 	.blanket__wrapper {
@@ -65,12 +65,18 @@
 	}
 
 	.about_wrapper {
-		@apply relative bg-shades-white p-[1.8rem] pt-[3.5rem] w-full h-fit max-w-[40rem] mx-auto rounded-2xl;
+		@apply relative bg-shades-white p-[1.8rem] w-full h-fit max-w-[40rem] mx-auto rounded-2xl;
+		/*  pt-[3.5rem] */
 	}
 
 	.close_icon {
 		@apply absolute top-[.5rem] right-[.5rem] text-neutral-500 p-[.6rem] cursor-pointer;
 	}
+
+	.about_content {
+		@apply h-full;
+	}
+	/* overflow-y-auto */
 
 	.about_content > p:first-child {
 		@apply text-neutral-600 font-semibold;
@@ -111,6 +117,10 @@
 	@media (max-width: 600px) {
 		.about_container {
 			@apply pt-[0];
+		}
+
+		.about_wrapper {
+			@apply mt-[20rem] h-fit;
 		}
 
 		.content_text:first-child {

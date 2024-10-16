@@ -14,7 +14,8 @@ import Image10 from "@/assets/images/CircularText.webp";
 import Image11 from "@/assets/images/about.webp";
 import Image12 from "@/assets/images/signature.webp";
 
-import Image13 from "@/assets/images/sample_design.png";
+import portfolio_1 from "@/assets/images/portfolio/image_1.webp";
+import portfolio_2 from "@/assets/images/portfolio/image_2.webp";
 
 // Function to load an image asynchronously
 const loadImage = (src) => {
@@ -47,7 +48,8 @@ export const useImageLoader = () => {
 		Image10,
 		Image11,
 		Image12,
-		Image13,
+		portfolio_1,
+		portfolio_2,
 	];
 
 	const loadAllImages = async () => {
