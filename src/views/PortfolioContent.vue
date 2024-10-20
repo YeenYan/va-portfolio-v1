@@ -7,265 +7,218 @@
 			</div>
 		</div>
 
-		<div class="swiper_container" v-if="!view_gallery">
-			<swiper
-				:effect="'cards'"
-				:grab-cursor="true"
-				:modules="modules"
-				class="mySwiper"
-			>
-				<swiper-slide v-for="(slide, index) in slides" :key="index">
-					<div class="swiper_wrapper">
-						<!-- {{ slide }} -->
-						<img :srcset="slide.image" alt="" class="sample_image" />
+		<div class="slider_container">
+			<i
+				class="fa-solid fa-caret-left slider_btn left"
+				@click.prevent="prevSlide"
+			></i>
+			<ul class="slider_wrapper" ref="scrollContainer">
+				<li v-for="(slide, index) in slides" :key="slide" :id="'slide-' + index">
+					<div class="image_wrapper">
+						<img :srcset="slide.image" alt="" />
 					</div>
-					<div class="swiper_text">
-						<p>
-							{{ slide.title }}
-						</p>
-					</div>
-				</swiper-slide>
-			</swiper>
-
-			<button class="btn btn_outline btn_view" @click.prevent="viewAllImages">
-				View All
-			</button>
-		</div>
-
-		<!-- v-if="loading" -->
-		<div class="loader_container max_width_container" v-if="loading">
-			<div class="loader">
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
-		</div>
-
-		<div
-			class="image_gallery_container max_width_container"
-			v-if="view_gallery && !loading"
-		>
-			<ul>
-				<li v-for="(slide, index) in gallery" :key="index">
-					<img :srcset="slide" alt="" class="gallery_image" />
+					<p class="slider_label">{{ slide.type }}</p>
 				</li>
 			</ul>
-			<button
-				class="btn btn_outline btn_view"
-				@click.prevent="view_gallery = false"
-			>
-				View Less
-			</button>
+			<i
+				class="fa-solid fa-caret-right slider_btn right"
+				@click.prevent="nextSlide"
+			></i>
 		</div>
 	</aside>
 </template>
 
-<script>
+<script setup>
 	import image_1 from "@/assets/images/portfolio/image_1.webp";
 	import image_2 from "@/assets/images/portfolio/image_2.webp";
 	import image_3 from "@/assets/images/portfolio/image_3.webp";
 	import image_4 from "@/assets/images/portfolio/image_4.webp";
 	import image_5 from "@/assets/images/portfolio/image_5.webp";
 	import image_6 from "@/assets/images/portfolio/image_6.webp";
+	import image_7 from "@/assets/images/portfolio/image_7.webp";
+	import image_8 from "@/assets/images/portfolio/image_8.webp";
 
 	import { ref } from "vue";
-	import { useStore } from "vuex";
 
-	// Import Swiper Vue.js components
-	import { Swiper, SwiperSlide } from "swiper/vue";
+	const slides = [
+		{ type: "Social Media Poster", image: image_1 },
+		{ type: "Social Media Poster", image: image_2 },
+		{ type: "Logo Design", image: image_3 },
+		{ type: "Logo Design", image: image_4 },
+		{ type: "Digital Painting", image: image_5 },
+		{ type: "Digital Painting", image: image_6 },
+		{ type: "Digital Painting", image: image_7 },
+		{ type: "Social Media Poster", image: image_8 },
+	];
 
-	// Import Swiper styles
-	import "swiper/css";
-	import "swiper/css/effect-cards";
+	// // Slider state
+	// const currentSlide = ref(1); // Start at the first actual slide (index 1)
+	// const transition_multiplier = ref(0);
+	// const transition_val = ref(0);
 
-	// Import required modules
-	import { EffectCards } from "swiper/modules";
+	// // let item = slides.shift();
+	// // slides.push(item);
+	// // Next slide logic
+	// const nextSlide = () => {
+	// 	currentSlide.value++;
+	// 	if (currentSlide.value == slides.length + 1) {
+	// 		currentSlide.value = 1;
+	// 		transition_multiplier.value = 0;
+	// 		transition_val.value = 0;
+	// 	} else {
+	// 		transition_multiplier.value = currentSlide.value * 5 - 5;
+	// 		transition_val.value =
+	// 			currentSlide.value * 100 - 100 + transition_multiplier.value;
+	// 	}
+	// 	console.log({
+	// 		trans: transition_multiplier.value,
+	// 		current: currentSlide.value,
+	// 		trans_val: transition_val.value,
+	// 	});
+	// 	// console.log(slides);
+	// };
 
-	export default {
-		components: {
-			Swiper,
-			SwiperSlide,
-		},
-		setup() {
-			const store = useStore();
+	// // Previous slide logic
+	// const prevSlide = () => {
+	// 	currentSlide.value--;
 
-			const slides = [
-				{
-					title: "Social Media Poster",
-					image: image_1,
-				},
-				{
-					title: "Social Media Poster",
-					image: image_2,
-				},
-			];
+	// 	if (currentSlide.value <= 0) {
+	// 		currentSlide.value = slides.length;
+	// 		transition_multiplier.value = currentSlide.value * 5 - 5;
+	// 		transition_val.value =
+	// 			currentSlide.value * 100 - 100 + transition_multiplier.value;
+	// 	} else {
+	// 		transition_multiplier.value = currentSlide.value * 5 - 5;
+	// 		transition_val.value =
+	// 			currentSlide.value * 100 - 100 + transition_multiplier.value;
+	// 	}
+	// 	console.log({
+	// 		trans: transition_multiplier.value,
+	// 		current: currentSlide.value,
+	// 		trans_val: transition_val.value,
+	// 	});
+	// };
 
-			/*****************************************
-			 ******** GALLERY
-			 ****************************************/
+	// const scrollContainer = ref(null);
 
-			const view_gallery = ref(false);
-			const loading = ref(false); // Local loading state
-			const loadError = ref(false);
+	// const scrollToElement = (sectionId) => {
+	// 	const element = document.getElementById(sectionId);
+	// 	if (element && scrollContainer.value) {
+	// 		const rect = element.getBoundingClientRect();
+	// 		const scrollX = scrollContainer.value.scrollLeft || window.pageXOffset;
+	// 		const offset = -40; // Adjust the offset as needed
 
-			const gallery = [image_1, image_2, image_3, image_4, image_5, image_6];
+	// 		// Calculate the target scroll position with the offset
+	// 		const targetX = scrollX + rect.left - offset;
 
-			// Function to load an image asynchronously
-			const loadImage = (src) => {
-				return new Promise((resolve, reject) => {
-					const img = new Image();
-					img.src = src;
+	// 		// Smooth scroll to the target horizontal position
+	// 		scrollContainer.value.scrollTo({
+	// 			left: targetX,
+	// 			behavior: "smooth",
+	// 		});
+	// 	}
+	// };
 
-					img.onload = () => resolve();
-					img.onerror = () => reject(new Error("Image failed to load"));
-				});
-			};
+	const currentSlide = ref(0);
+	const scrollContainer = ref(null);
 
-			const viewAllImages = async () => {
-				view_gallery.value = true;
-				loading.value = true; // Start loading
-				loadError.value = false; // Reset error state
+	const scrollToSlide = (slideIndex) => {
+		const targetSlide = document.getElementById(`slide-${slideIndex}`);
+		if (targetSlide) {
+			const container = scrollContainer.value;
+			const containerWidth = container.clientWidth;
+			const slideRect = targetSlide.getBoundingClientRect();
+			const containerRect = container.getBoundingClientRect();
 
-				try {
-					// Load all images
-					await Promise.all(gallery.map((src) => loadImage(src)));
-					// Set loading to false once all images are loaded
-					loading.value = false;
-				} catch (error) {
-					loadError.value = true; // Set error state if any image fails to load
-					loading.value = false; // End loading state
-				}
-			};
+			// Calculate how far to scroll so the image is centered
+			const targetScrollX =
+				container.scrollLeft +
+				(slideRect.left - containerRect.left) -
+				(containerWidth / 2 - slideRect.width / 2);
 
-			return {
-				modules: [EffectCards],
-				slides,
-				view_gallery,
-				viewAllImages,
-				loading,
-				gallery,
-			};
-		},
+			container.scrollTo({
+				left: targetScrollX,
+				behavior: "smooth",
+			});
+		}
+	};
+
+	const nextSlide = () => {
+		if (currentSlide.value < slides.length - 1) {
+			currentSlide.value++;
+		} else {
+			currentSlide.value = 0; // Loop back to first slide
+		}
+		scrollToSlide(currentSlide.value);
+	};
+
+	const prevSlide = () => {
+		if (currentSlide.value > 0) {
+			currentSlide.value--;
+		} else {
+			currentSlide.value = slides.length - 1; // Loop back to last slide
+		}
+		scrollToSlide(currentSlide.value);
 	};
 </script>
 
 <style lang="postcss" scoped>
 	.portfolio_section_container {
-		@apply w-full overflow-x-hidden flex flex-col items-center pt-[7rem] pb-[10rem] h-full mx-auto;
+		@apply w-full overflow-x-hidden flex flex-col items-center pt-[7rem] pb-[20rem] h-full mx-auto;
 	}
 
-	.swiper_container {
-		@apply flex flex-col items-center w-[80%] mt-[5rem];
+	/* ========================================================================== */
+	/* ========================================================================== */
+	.slider_container {
+		@apply relative flex items-center mt-[5rem] mx-auto;
 	}
 
-	.mySwiper {
-		@apply grid w-full max-w-[25rem] h-[35rem] rounded-2xl;
-		grid-template-rows: 1fr 0.5fr;
-		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	.slider_wrapper {
+		@apply flex gap-4 w-full max-w-[25rem] max-h-[30rem] rounded-[1.5rem] overflow-hidden;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 	}
 
-	.swiper-slide {
-		@apply flex flex-col bg-neutral-50 border-[.3px] border-neutral-200;
-		border-radius: 18px;
-		font-size: 22px;
+	.slider_wrapper > li {
+		@apply min-w-[100%] bg-shades-white border-[.3px] rounded-[1.5rem];
+		transition: all 1s ease-in-out;
+		transform: translateX(0rem);
 	}
 
-	.swiper_wrapper {
-		@apply p-[1rem] h-full bg-shades-white;
+	.image_wrapper {
+		@apply min-w-full h-full max-h-[25rem] rounded-t-[1.5rem] overflow-hidden;
 	}
 
-	.sample_image {
-		@apply rounded-2xl;
-		width: 100%; /* Ensure the image doesn't exceed the container width */
-		height: 100%; /* Ensure the image doesn't exceed the container height */
-		object-fit: cover; /* Cover the container while maintaining aspect ratio */
-	}
-
-	.swiper_text {
-		@apply text-base text-neutral-700 px-[1rem] pt-[1.5rem] pb-[2rem];
-	}
-
-	.btn_view {
-		@apply mt-[4rem];
-	}
-
-	/*****************************************
-	********** GALLERY_STYLE_IMAGES
-	****************************************/
-	.image_gallery_container {
-		@apply flex flex-col items-center mt-[5rem] mx-auto;
-	}
-
-	.image_gallery_container > ul {
-		@apply grid gap-2;
-		grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-	}
-
-	.gallery_image {
-		@apply rounded-2xl;
-		width: 100%; /* Ensure the image doesn't exceed the container width */
-		height: auto; /* Ensure the image doesn't exceed the container height */
-		object-fit: cover; /* Cover the container while maintaining aspect ratio */
-	}
-
-	.loader_container {
-		@apply flex justify-center items-center h-screen;
-	}
-
-	/* From Uiverse.io by cosnametv */
-	.loader {
-		--color: #a5a5b0;
-		--size: 70px;
-		width: var(--size);
-		height: var(--size);
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 5px;
-	}
-
-	.loader span {
+	.image_wrapper img {
 		width: 100%;
-		height: 100%;
-		background-color: var(--color);
-		animation: keyframes-blink 0.6s alternate infinite linear;
+		height: 100% !important;
+		object-fit: cover;
 	}
 
-	.loader span:nth-child(1) {
-		animation-delay: 0ms;
+	.slider_label {
+		@apply text-sm text-neutral-700 font-semibold px-[1.5rem] py-[1.5rem] h-full;
 	}
 
-	.loader span:nth-child(2) {
-		animation-delay: 200ms;
+	.slider_btn {
+		@apply text-2xl text-neutral-900 px-[1.4rem] py-[.8rem] border-[.1rem] border-shades-white rounded-full  cursor-pointer;
+		background: rgb(0, 0, 0, 0.1);
+		backdrop-filter: blur(10px);
 	}
 
-	.loader span:nth-child(3) {
-		animation-delay: 300ms;
+	.slider_btn.left {
+		@apply absolute left-[-2.2rem] z-[2];
 	}
 
-	.loader span:nth-child(4) {
-		animation-delay: 400ms;
+	.slider_btn.right {
+		@apply absolute right-[-2.2rem];
 	}
 
-	.loader span:nth-child(5) {
-		animation-delay: 500ms;
-	}
-
-	.loader span:nth-child(6) {
-		animation-delay: 600ms;
-	}
-
-	@keyframes keyframes-blink {
-		0% {
-			opacity: 0.3;
-			transform: scale(0.5) rotate(5deg);
+	@media (max-width: 600px) {
+		.slider_btn.left {
+			@apply bottom-[-5rem] left-[8rem];
 		}
 
-		50% {
-			opacity: 1;
-			transform: scale(1);
+		.slider_btn.right {
+			@apply bottom-[-5rem] right-[8rem];
 		}
 	}
 </style>

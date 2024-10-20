@@ -16,6 +16,12 @@ import Image12 from "@/assets/images/signature.webp";
 
 import portfolio_1 from "@/assets/images/portfolio/image_1.webp";
 import portfolio_2 from "@/assets/images/portfolio/image_2.webp";
+import portfolio_3 from "@/assets/images/portfolio/image_3.webp";
+import portfolio_4 from "@/assets/images/portfolio/image_4.webp";
+import portfolio_5 from "@/assets/images/portfolio/image_5.webp";
+import portfolio_6 from "@/assets/images/portfolio/image_6.webp";
+import portfolio_7 from "@/assets/images/portfolio/image_7.webp";
+import portfolio_8 from "@/assets/images/portfolio/image_8.webp";
 
 // Function to load an image asynchronously
 const loadImage = (src) => {
@@ -50,6 +56,12 @@ export const useImageLoader = () => {
 		Image12,
 		portfolio_1,
 		portfolio_2,
+		portfolio_3,
+		portfolio_4,
+		portfolio_5,
+		portfolio_6,
+		portfolio_7,
+		portfolio_8,
 	];
 
 	const loadAllImages = async () => {

@@ -61,6 +61,14 @@
 					Portfolio
 				</li>
 				<li class="mobile_nav_list" @click="mobileScrollTo('contact')">Contact</li>
+
+				<ul class="links_container">
+					<li v-for="link in links" :key="link" class="link_wrapper">
+						<a :href="link.link" target="_blank" class="link_icon">
+							<i :class="link.icon"></i>
+						</a>
+					</li>
+				</ul>
 			</ul>
 
 			<ul
@@ -83,6 +91,25 @@
 	import { useStore } from "vuex";
 
 	const store = useStore();
+
+	const links = [
+		{
+			icon: "fa-brands fa-facebook-f",
+			link: "https://www.facebook.com/irene.toledo.756412",
+		},
+		{
+			icon: "fa-brands fa-instagram",
+			link: "https://www.instagram.com/ayeentoledo/",
+		},
+		{
+			icon: "fa-brands fa-x-twitter",
+			link: "https://x.com/IM_yinyan",
+		},
+		{
+			icon: "fa-brands fa-linkedin-in",
+			link: "https://www.linkedin.com/in/irene-belaro-toledo/",
+		},
+	];
 
 	/*****************************************
 	 ******** WATCH REAL-TIME SCREEN SIZE
@@ -209,6 +236,10 @@
 
 	.mobile_nav_list {
 		@apply text-lg text-shades-white font-medium;
+	}
+
+	.links_container {
+		@apply pt-[2rem];
 	}
 
 	/*****************************************
