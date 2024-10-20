@@ -172,7 +172,7 @@
 	/* ========================================================================== */
 	/* ========================================================================== */
 	.slider_container {
-		@apply relative flex items-center mt-[5rem] mx-auto;
+		@apply relative flex items-center mt-[5rem] w-[90%] max-w-fit mx-auto;
 	}
 
 	.slider_wrapper {
@@ -216,11 +216,11 @@
 
 	@media (max-width: 600px) {
 		.slider_btn.left {
-			@apply bottom-[-5rem] left-[8rem];
+			@apply bottom-[-5rem] left-[30%];
 		}
 
 		.slider_btn.right {
-			@apply bottom-[-5rem] right-[8rem];
+			@apply bottom-[-5rem] right-[30%];
 		}
 	}
 </style>
