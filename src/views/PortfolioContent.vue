@@ -37,18 +37,20 @@
 	import image_6 from "@/assets/images/portfolio/image_6.webp";
 	import image_7 from "@/assets/images/portfolio/image_7.webp";
 	import image_8 from "@/assets/images/portfolio/image_8.webp";
+	import image_9 from "@/assets/images/portfolio/image_9.webp";
 
 	import { ref } from "vue";
 
 	const slides = [
 		{ type: "Social Media Poster", image: image_1 },
-		{ type: "Social Media Poster", image: image_2 },
+		{ type: "Social Media Poster", image: image_8 },
+		{ type: "Social Media Poster", image: image_9 },
 		{ type: "Logo Design", image: image_3 },
 		{ type: "Logo Design", image: image_4 },
 		{ type: "Digital Painting", image: image_5 },
 		{ type: "Digital Painting", image: image_6 },
 		{ type: "Digital Painting", image: image_7 },
-		{ type: "Social Media Poster", image: image_8 },
+		{ type: "Resume / CV Design", image: image_2 },
 	];
 
 	// // Slider state
